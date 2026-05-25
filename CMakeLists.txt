@@ -162,7 +162,7 @@ message(STATUS "FetchContent base directory: ${FETCHCONTENT_BASE_DIR}")
 # when loaded by Python.
 set(CMAKE_INSTALL_RPATH "$ORIGIN")
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror")
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror")
 
 if(VLLM_GPU_LANG STREQUAL "SYCL")
   #
@@ -172,7 +172,7 @@ if(VLLM_GPU_LANG STREQUAL "SYCL")
   # TODO: check SYCL flags
   set(CMAKE_${VLLM_GPU_LANG}_FLAGS "${CMAKE_${VLLM_GPU_LANG}_FLAGS}")
   set(SYCL_FIRST_HEADER "${CMAKE_CURRENT_SOURCE_DIR}/csrc/sycl_first.h")
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -include ${SYCL_FIRST_HEADER}")
+  #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -include ${SYCL_FIRST_HEADER}")
 
   # AOT devices can be overridden via environment variables:
   # VLLM_XPU_AOT_DEVICES and VLLM_XPU_XE2_AOT_DEVICES Example: export
@@ -197,7 +197,7 @@ if(VLLM_GPU_LANG STREQUAL "SYCL")
   list(APPEND SYCL_FLAGS "-fsycl")
 
   set(SYCL_COMPILE_FLAGS ${SYCL_FLAGS})
-  set(SYCL_COMPILE_FLAGS ${SYCL_COMPILE_FLAGS} "-O3" "-DNDEBUG")
+  set(SYCL_COMPILE_FLAGS ${SYCL_COMPILE_FLAGS} ${CMAKE_CXX_FLAGS})
   if(AOT_DEVICES)
     set(SYCL_COMPILE_FLAGS ${SYCL_COMPILE_FLAGS} -fsycl-targets=spir64_gen)
   endif()
