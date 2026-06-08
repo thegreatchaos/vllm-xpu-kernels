@@ -203,3 +203,6 @@ shellcheck*/
 
 # benchmark kernel config
 configs
+
+# ctags
+tags
